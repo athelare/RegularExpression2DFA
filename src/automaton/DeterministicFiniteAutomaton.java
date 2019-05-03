@@ -73,10 +73,16 @@ public class DeterministicFiniteAutomaton {
             else
                 q1.getPreviousNodes().add(i);
         }
-        if(q1.getPreviousNodes().size()>0)
+        if(q1.getPreviousNodes().size()>0 && q1.getPreviousNodes().contains(0)) {
             this.nodes.add(q1);
-        if(q2.getPreviousNodes().size()>0)
+            if(q2.getPreviousNodes().size()>0)
+                this.nodes.add(q2);
+        }else {
             this.nodes.add(q2);
+            if(q1.getPreviousNodes().size()>0)
+                this.nodes.add(q1);
+        }
+
 
         /*使用Hopcroft思想进行化简*/
         /*当前检查的节点的编号，如果进行一轮检查结束发现发生过改变，那么indexCurrent置零，重新开始*/
